@@ -59,4 +59,4 @@ foreach ($User in $ADUsers) {
     }
 }
 
-Read-Host -Prompt "Press Enter to exit"
+Get-ADUser -SearchBase ‘OU=IT,OU=VanRoey - Users,OU=VanRoey,DC=scripttest,DC=be’ -Filter * | ForEach-Object {Add-ADGroupMember -Identity ‘Remote Desktop Users’ -Members $_ }
