@@ -1,0 +1,12 @@
+﻿name;path
+VanRoey;DC=scripttest,DC=be
+VanRoey - Users;OU=VanRoey,DC=scripttest,DC=be
+VanRoey - Computers;OU=VanRoey,DC=scripttest,DC=be
+VanRoey - Security Groups;OU=VanRoey,DC=scripttest,DC=be
+Marketing;OU=VanRoey - Users,OU=VanRoey,DC=scripttest,DC=be
+HR;OU=VanRoey - Users,OU=VanRoey,DC=test.omgeving,DC=be
+IT;OU=VanRoey - Users,OU=VanRoey,DC=test.omgeving,DC=be
+Accounting;OU=VanRoey - Users,OU=VanRoey,DC=test.omgeving,DC=be
+Management;OU=VanRoey - Users,OU=VanRoey,DC=test.omgeving,DC=be
+Servers;OU=VanRoey - Computers,OU=VanRoey,DC=scripttest,DC=be
+AVD;OU=VanRoey - Computers,OU=VanRoey,DC=scripttest,DC=be
