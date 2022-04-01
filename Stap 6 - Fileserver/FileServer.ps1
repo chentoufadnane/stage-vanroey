@@ -1,13 +1,13 @@
 #Update based on your organizational requirements
 $Location = 'westeurope'
-$ResourceGroupName = 'ScriptTest'
+$ResourceGroupName = 'demomarch'
 $NetworkSecurityGroup = 'NSG-Fileserver'
 $AvailabilitySet = 'Fileservers'
 $VMSize = 'Standard_DS1_v2'
 $DataDiskSize = '40'
-$AdminUsername = 'myAdmin'
-$AdminPassword = 'myTestPass123'
-$FileServer1 = 'FS01'
+$AdminUsername = 'demoFSAdmin'
+$AdminPassword = 'demoTestPass123'
+$FileServer1 = 'demoFS'
 $FSIP = '10.10.10.12'
 $publicIP = 'Standard'
 

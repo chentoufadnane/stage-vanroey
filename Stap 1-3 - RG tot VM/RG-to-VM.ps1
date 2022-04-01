@@ -1,26 +1,22 @@
 #Update based on your organizational requirements
-$subscriptionId = 'd29d7ac2-9187-474e-978d-2f76a4f1c1c3'
 $Location = 'westeurope'
-$ResourceGroupName = 'ScriptTest'
+$ResourceGroupName = 'demoMarch'
 $NetworkSecurityGroup = 'NSG-DomainController'
-$VNetName = 'ScriptVNet'
+$VNetName = 'demoVNet'
 $VNetAddress = '10.10.0.0/16'
-$SubnetName = 'ScriptSubnet'
+$SubnetName = 'demoSubnet'
 $SubnetAddress = '10.10.10.0/24'
-$AvailabilitySet = 'DomainControllers'
+$AvailabilitySet = 'demoDomainControllers'
 $VMSize = 'Standard_DS1_v2'
 $DataDiskSize = '20'
-$AdminUsername = 'myAdmin'
-$AdminPassword = 'myTestPass123'
-$DomainController1 = 'AZDC01'
+$AdminUsername = 'demoAdmin'
+$AdminPassword = 'demoTestPass123'
+$DomainController1 = 'demoDC'
 $DC1IP = '10.10.10.11'
 $publicIP = 'Standard'
 
 # Connect to your Azure account
 Connect-AzAccount
-
-# Choose your subscription
-Select-AzSubscription --SubscriptionId $subscriptionId
 
 # Create a resource group.
 az group create --name $ResourceGroupName --location $Location

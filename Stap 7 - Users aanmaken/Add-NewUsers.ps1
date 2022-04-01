@@ -5,7 +5,7 @@ Import-Module ActiveDirectory
 $ADUsers = Import-Csv C:\Temp\scripttest-users.csv -Delimiter ";"
 
 # Define UPN
-$UPN = "scripttest.be"
+$UPN = "demomarch.be"
 
 # Loop through each row containing user details in the CSV file
 foreach ($User in $ADUsers) {
