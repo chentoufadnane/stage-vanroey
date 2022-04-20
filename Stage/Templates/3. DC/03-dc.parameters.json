@@ -1,0 +1,48 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "script-url":{
+            "value": "https://arm3obhyojuxy7rs.blob.core.windows.net/powershell/03-adds.ps1"
+        },
+        "diskEncryptionSetId": {
+            "value": "/subscriptions/d29d7ac2-9187-474e-978d-2f76a4f1c1c3/resourceGroups/AC-ARM/providers/Microsoft.Compute/diskEncryptionSets/AC-ARM-DiskEncSet"
+        },
+        "publicIpAddressType": {
+            "value": "Static"
+        },
+        "publicIpAddressSku": {
+            "value": "Basic"
+        },
+        "osDiskType": {
+            "value": "StandardSSD_LRS"
+        },
+        "virtualMachineSize": {
+            "value": "Standard_DS1_v2"
+        },
+        "adminUsername": {
+            "value": "armAdmin"
+        },
+        "adminPassword": {
+            "value": "armTestPass123"
+        },
+        "patchMode": {
+            "value": "Manual"
+        },
+        "enableHotpatching": {
+            "value": false
+        },
+        "availabilitySetName": {
+            "value": "arm-DomainControllers"
+        },
+        "availabilitySetPlatformFaultDomainCount": {
+            "value": 2
+        },
+        "availabilitySetPlatformUpdateDomainCount": {
+            "value": 5
+        },
+        "enableAcceleratedNetworking":{
+            "value": true
+        }
+    }
+}

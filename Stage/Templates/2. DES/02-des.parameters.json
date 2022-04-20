@@ -1,0 +1,12 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "KeySecret":{
+            "value": "https://arm-kv-3obhyojuxy7rs.vault.azure.net/keys/AC-ARM-KEY-3obhyojuxy7rs/5d96a2d0721e4b0892fc58e65e9f8180"
+        },
+        "SourceVaultURL": {
+            "value": "/subscriptions/d29d7ac2-9187-474e-978d-2f76a4f1c1c3/resourceGroups/AC-ARM/providers/Microsoft.KeyVault/vaults/ARM-KV-3obhyojuxy7rs"
+        }
+    }
+}
