@@ -17,10 +17,6 @@
                 "Premium"
             ]
         },
-        "DiskEncName": {
-            "type": "string",
-            "defaultValue": "1"
-        },
         "accessPolicies": {
             "type": "array"
         },
@@ -75,11 +71,8 @@
     "variables": {
         "location": "[resourceGroup().location]",
         "storageName": "[concat('arm',uniqueString(resourceGroup().id))]",
-        "SourceVaultURL": "[concat('/subscriptions/d29d7ac2-9187-474e-978d-2f76a4f1c1c3/resourceGroups/',resourceGroup().name,'/providers/Microsoft.KeyVault/vaults/',variables('KeyVaultName'))]",
         "KeyVaultName": "[concat('ARM-KV-',uniqueString(resourceGroup().id))]",
-        "KeyName": "[concat('ARM-KEY-',uniqueString(resourceGroup().name))]",
-        "KeySecret": "[concat('https://',variables('KeyVaultName'),'.vault.azure.net/keys/',variables('KeyName'))]",
-        "DiskEncName": "[concat('ARM-DES-',parameters('DiskEncName'))]"
+        "KeyName": "[concat('ARM-KEY-',uniqueString(resourceGroup().name))]"
     },
     "resources": [
         {
@@ -132,28 +125,6 @@
             "properties": {
                 "kty": "[parameters('KeyType')]",
                 "keySize": "[parameters('KeySize')]"
-            }
-        },
-        {
-            "type": "Microsoft.Compute/diskEncryptionSets",
-            "apiVersion": "2021-04-01",
-            "name": "[variables('DiskEncName')]",
-            "location": "[resourceGroup().location]",
-            "dependsOn": [
-                "[resourceId('Microsoft.KeyVault/vaults/keys',variables('KeyVaultName'),variables('KeyName'))]"
-            ],
-            "identity": {
-                "type": "SystemAssigned"
-            },
-            "properties": {
-                "activeKey": {
-                    "keyUrl": "[variables('KeySecret')]",
-                    "sourceVault": {
-                        "id": "[variables('SourceVaultURL')]"
-                    }
-                },
-                "encryptionType": "EncryptionAtRestWithCustomerKey",
-                "rotationToLatestKeyVersionEnabled": true
             }
         }
     ],
