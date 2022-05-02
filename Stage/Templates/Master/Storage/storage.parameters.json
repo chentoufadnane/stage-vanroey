@@ -1,0 +1,77 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "tenantId": {
+            "value": "a354cec5-4943-4a17-b194-0f7e6db8eb62"
+        },
+        "networkAcls": {
+          "value": {
+            "defaultAction": "allow",
+            "bypass": "AzureServices",
+            "ipRules": [],
+            "virtualNetworkRules": []
+          }
+        },        
+        "accessPolicies": {
+            "value": [
+                {
+                  "tenantId": "a354cec5-4943-4a17-b194-0f7e6db8eb62",
+                  "objectId": "876ea173-5564-4161-8728-35af3237af83",
+                  "permissions": {
+                    "keys": [
+                      "Get",
+                      "List",
+                      "Update",
+                      "Create",
+                      "Import",
+                      "Delete",
+                      "Recover",
+                      "Backup",
+                      "Restore",
+                      "GetRotationPolicy",
+                      "SetRotationPolicy",
+                      "Rotate",
+                      "Sign",
+                      "Verify",
+                      "WrapKey",
+                      "UnwrapKey",
+                      "Encrypt",
+                      "Decrypt",
+                      "Purge"
+                    ],
+                    "secrets": [
+                      "Get",
+                      "List",
+                      "Set",
+                      "Delete",
+                      "Recover",
+                      "Backup",
+                      "Restore",
+                      "Purge"
+                    ],
+                    "certificates": [
+                      "Get",
+                      "List",
+                      "Update",
+                      "Create",
+                      "Import",
+                      "Delete",
+                      "Recover",
+                      "Backup",
+                      "Restore",
+                      "ManageContacts",
+                      "ManageIssuers",
+                      "GetIssuers",
+                      "ListIssuers",
+                      "SetIssuers",
+                      "DeleteIssuers",
+                      "Purge"
+                    ]
+                  },
+                  "applicationId": ""
+                }
+              ]
+        }                 
+    }
+}
