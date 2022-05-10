@@ -1,6 +1,6 @@
-$GIName = 'mst-GI'
-$GIAdminUsername = 'giAdmin'
-$GIAdminPassword = ConvertTo-SecureString -String "giTestPass123" -AsPlainText -Force
+$GIName = 'mstGI'
+$GIAdminUsername = 'mstAdmin'
+$GIAdminPassword = ConvertTo-SecureString -String "mstTempPass123" -AsPlainText -Force
 $domain = 'mstechnics.be'
 $oupath = 'OU=Servers,OU=MSTechnics - Computers,OU=MSTechnics,DC=mstechnics,DC=be'
 
