@@ -1,1 +1,0 @@
-Set-NetFirewallProfile -All -Enabled False
