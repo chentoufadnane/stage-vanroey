@@ -1,0 +1,1 @@
+Invoke-WebRequest -Uri "https://scriptsstoragevra.blob.core.windows.net/scripts/ou-file.csv" -OutFile "C:\Temp\ou-file.csv"

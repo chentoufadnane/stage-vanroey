@@ -1,0 +1,13 @@
+﻿name;path
+VanRoey;DC=mstechnics,DC=be
+VanRoey - Users;OU=VanRoey,DC=mstechnics,DC=be
+VanRoey - Computers;OU=VanRoey,DC=mstechnics,DC=be
+VanRoey - Security Groups;OU=VanRoey,DC=mstechnics,DC=be
+VanRoey - Administrators;OU=VanRoey,DC=mstechnics,DC=be
+Marketing;OU=VanRoey - Users,OU=VanRoey,DC=mstechnics,DC=be
+HR;OU=VanRoey - Users,OU=VanRoey,DC=mstechnics,DC=be
+IT;OU=VanRoey - Users,OU=VanRoey,DC=mstechnics,DC=be
+Accounting;OU=VanRoey - Users,OU=VanRoey,DC=mstechnics,DC=be
+Management;OU=VanRoey - Users,OU=VanRoey,DC=mstechnics,DC=be
+Servers;OU=VanRoey - Computers,OU=VanRoey,DC=mstechnics,DC=be
+AVD;OU=VanRoey - Computers,OU=VanRoey,DC=mstechnics,DC=be
