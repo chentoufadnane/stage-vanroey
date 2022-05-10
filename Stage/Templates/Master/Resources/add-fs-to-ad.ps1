@@ -1,6 +1,6 @@
-$FSName = 'mst-FS1'
-$FSAdminUsername = 'fsAdmin'
-$FSAdminPassword = ConvertTo-SecureString -String "fsTestPass123" -AsPlainText -Force
+$FSName = 'mstFS'
+$FSAdminUsername = 'mstAdmin'
+$FSAdminPassword = ConvertTo-SecureString -String "mstTempPass123" -AsPlainText -Force
 $domain = 'mstechnics.be'
 $oupath = 'OU=Servers,OU=MSTechnics - Computers,OU=MSTechnics,DC=mstechnics,DC=be'
 
