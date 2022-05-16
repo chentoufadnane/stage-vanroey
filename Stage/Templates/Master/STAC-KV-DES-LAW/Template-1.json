@@ -1,0 +1,138 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "tenantId": {
+            "type": "string"
+        },
+        "networkAcls": {
+            "type": "object"
+        }
+    },
+    "functions": [],
+    "variables": {
+        "location": "[resourceGroup().location]",
+        "storageName": "[concat('mst',uniqueString(resourceGroup().id))]",
+        "KeyVaultName": "[concat('mst-KV-',uniqueString(resourceGroup().id))]",
+        "KeyName": "[concat(resourceGroup().name,'-KEY-',uniqueString(resourceGroup().id))]",
+        "DiskEncName": "[concat(resourceGroup().name,'-DiskEncSet')]",   
+        "LogAnalyticsWorkspaceName" : "[concat(resourceGroup().name, '-LAW')]"                                                      
+    },
+    "resources": [
+        // Storage Account
+        {
+            "name": "[variables('storageName')]",
+            "type": "Microsoft.Storage/storageAccounts",
+            "apiVersion": "2021-04-01",
+            "location": "[variables('location')]",
+            "kind": "StorageV2",
+            "sku": {
+                "name": "Standard_LRS",
+                "tier": "Standard"
+            },
+            "properties": {
+                "allowBlobPublicAccess": true,
+                "networkAcls": "[parameters('networkAcls')]",
+                "encryption": {
+                    "services": {
+                        "file": {
+                            "keyType": "Account",
+                            "enabled": true
+                        },
+                        "blob": {
+                            "keyType": "Account",
+                            "enabled": true
+                        }
+                    },
+                    "keySource": "Microsoft.Storage"
+                }                
+            }
+        },
+        // Key Vault + Key
+        {
+            "name": "[variables('KeyVaultName')]",
+            "type": "Microsoft.KeyVault/vaults",
+            "apiVersion": "2019-09-01",
+            "location": "[variables('location')]",
+            "properties": {
+                "enabledForDeployment": true,
+                "enabledForTemplateDeployment": true,
+                "enabledForDiskEncryption": true,
+                "enableRbacAuthorization": true,
+                "enablePurgeProtection": true,
+                "tenantId": "[parameters('tenantId')]",
+                "sku": {
+                    "name": "standard",
+                    "family": "A"
+                },
+                "publicNetworkAccess": "Enabled",
+                "enableSoftDelete": true,
+                "softDeleteRetentionInDays": 7,
+                "networkAcls": "[parameters('networkAcls')]"
+            },
+            "resources": [
+                {
+                    "type": "Microsoft.KeyVault/vaults/keys",
+                    "name": "[concat(variables('keyvaultName'), '/', variables('keyName'))]",
+                    "apiVersion": "2021-10-01",
+                    "dependsOn": [
+                        "[resourceId('Microsoft.KeyVault/vaults', variables('KeyVaultName'))]"
+                    ],
+                    "properties": {
+                        "kty": "RSA",
+                        "keySize": 2048
+                    }
+                }
+            ],
+            "dependsOn": [
+                "[resourceId('Microsoft.Storage/storageAccounts', variables('storageName'))]"
+                
+            ]            
+        },
+        // Disk Encryption Set
+        {
+            "type": "Microsoft.Compute/diskEncryptionSets",
+            "apiVersion": "2021-04-01",
+            "name": "[variables('DiskEncName')]",
+            "location": "[resourceGroup().location]",
+            "dependsOn": [
+                "[resourceId('Microsoft.KeyVault/vaults/keys',variables('KeyVaultName'), variables('KeyName'))]"
+            ],            
+            "identity": {
+                "type": "SystemAssigned"
+            },
+            "properties": {
+                "activeKey": {
+                    "keyUrl": "[reference(resourceId('Microsoft.KeyVault/vaults/keys', variables('KeyVaultName'), variables('KeyName'))).keyUriWithVersion]",
+                    "sourceVault": {
+                        "id": "[resourceId('Microsoft.KeyVault/vaults',variables('KeyVaultName'))]"
+                    }
+                },
+                "encryptionType": "EncryptionAtRestWithCustomerKey",
+                "rotationToLatestKeyVersionEnabled": true
+            }
+        },
+        // Log Analytics Workspace
+        {
+            "type": "microsoft.operationalinsights/workspaces",
+            "apiVersion": "2021-12-01-preview",
+            "name": "[variables('LogAnalyticsWorkspaceName')]",
+            "location": "[variables('location')]",
+            "properties": {
+                "sku": {
+                    "name": "pergb2018"
+                },
+                "retentionInDays": 30,
+                "features": {
+                    "enableLogAccessUsingOnlyResourcePermissions": true
+                },
+                "workspaceCapping": {
+                    "dailyQuotaGb": -1
+                },
+                "publicNetworkAccessForIngestion": "Enabled",
+                "publicNetworkAccessForQuery": "Enabled"
+            }
+        }                   
+    ],
+    "outputs": {}
+}
